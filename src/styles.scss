@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.wordle-cell {
+    display: inline-block;
+    text-align: center;
+    text-transform: capitalize;
+    width: 1em;
+    height: 1em;
+    border: 3px solid black;
+    margin: .5em;
+    padding: .5em;
+}
