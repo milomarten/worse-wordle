@@ -1,5 +1,5 @@
 <div class="wordle-line">
-    @for (letter of word; track $index) {
-        <span class="wordle-cell">{{letter}}</span>
+    @for (result of results; track $index) {
+        <span [class]="'wordle-cell ' + result.state">{{ result.letter }}</span>
     }
 </div>

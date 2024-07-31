@@ -1,1 +1,5 @@
-<p>wordle-grid works!</p>
+<div class="wordle-grid">
+    @for (guess of guesses; track $index) {
+        <app-wordle-line [results]="guess"></app-wordle-line>
+    }
+</div>

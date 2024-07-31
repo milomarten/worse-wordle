@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { WordGuess } from '../models/wordle-state';
 
 @Component({
   selector: 'app-wordle-line',
@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './wordle-line.component.scss'
 })
 export class WordleLineComponent {
-  public word = "PABST";
+  @Input({required: true})
+  public results!: WordGuess
 }
