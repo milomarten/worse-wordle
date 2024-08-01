@@ -10,16 +10,7 @@ import { createDummyGuess, LetterState, WordGuess } from '../models/wordle-state
   templateUrl: './wordle-grid.component.html',
   styleUrl: './wordle-grid.component.scss'
 })
-export class WordleGridComponent implements OnInit {
-  @Input({ required: true })
-  public length!: number;
-
-  @Input({ required: true})
-  public height!: number;
-
+export class WordleGridComponent {
+  @Input()
   guesses: Array<WordGuess> = [];
-
-  ngOnInit(): void {
-    this.guesses[0] = createDummyGuess("SNEAK", ["not-present", "not-present", "not-present", "present-right-place", "present-wrong-place"])
-  }
 }

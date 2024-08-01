@@ -1,0 +1,10 @@
+.wordle-game {
+    display: inline-grid;
+    grid-template-rows: auto;
+}
+
+input {
+    height: 1em;
+    padding: .5em;
+    margin: .5em;
+}

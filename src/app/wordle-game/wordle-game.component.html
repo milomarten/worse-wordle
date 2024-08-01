@@ -1,0 +1,5 @@
+<form #wordle="ngForm" class="wordle-game" (submit)="wordle.valid && submitGuess()">
+    <app-wordle-grid [guesses]="guesses"></app-wordle-grid>
+    <input type="text" required minlength="5" maxlength="5" [(ngModel)]="currentGuess" name="guess" (keypress)="onKeyEnter($event)" [disabled]="finished">
+    <button type="submit" style="display:none">hidden submit</button>
+</form>
