@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { WordleLineComponent } from '../wordle-line/wordle-line.component';
-import { createDummyGuess, LetterState, WordGuess } from '../models/wordle-state';
+import { LetterState, WordGuess } from '../models/wordle-state';
 
 @Component({
   selector: 'app-wordle-grid',

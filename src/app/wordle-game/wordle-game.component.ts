@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Letter, WordGuess } from '../models/wordle-state';
+import { AlphabetState, defaultAlphabetState, Letter, WordGuess } from '../models/wordle-state';
 import { WordleGridComponent } from "../wordle-grid/wordle-grid.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { WordBankService } from '../word-bank.service';
 
 const NOT_ALPHABETIC = /[^A-Z]/g;
 
@@ -23,11 +24,19 @@ export class WordleGameComponent {
   @Output()
   public onFailure: EventEmitter<void> = new EventEmitter();
 
+  @Output()
+  public onGuess: EventEmitter<WordGuess> = new EventEmitter();
+
   guesses: Array<WordGuess> = [];
-  answer: string = "SNEAK";
+  answer: string = "";
   _currentGuess: string = "";
+  alphabetState: AlphabetState = defaultAlphabetState();
 
   finished = false;
+
+  public constructor(private wordBankService: WordBankService) {
+    this.answer = wordBankService.getWord();
+  }
 
   get currentGuess() {
     return this._currentGuess;
@@ -36,10 +45,24 @@ export class WordleGameComponent {
     this._currentGuess = value.toUpperCase();
   }
 
+  get alphabetStateByLetter() {
+    return Object.entries(this.alphabetState);
+  }
+
   submitGuess() {
     var analysis = this.analyzeGuess(this.currentGuess);
     this.guesses.push(analysis);
     this.currentGuess = "";
+
+    this.onGuess.emit(analysis);
+    analysis.forEach(letter => {
+      const existing = this.alphabetState[letter.letter]
+      if (existing == "unknown" || existing == "not-present") {
+        this.alphabetState[letter.letter] = letter.state;
+      } else if (letter.state == "present-right-place") {
+        this.alphabetState[letter.letter] = letter.state;
+      }
+    })
 
     if (analysis.every(g => g.state == "present-right-place")) {
       this.onComplete.emit()

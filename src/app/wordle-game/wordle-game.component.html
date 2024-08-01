@@ -3,3 +3,6 @@
     <input type="text" required minlength="5" maxlength="5" [(ngModel)]="currentGuess" name="guess" (keypress)="onKeyEnter($event)" [disabled]="finished">
     <button type="submit" style="display:none">hidden submit</button>
 </form>
+@for (letter of alphabetStateByLetter; track letter[0]) {
+    <div>{{ letter[0] + " - " + letter[1] }}</div>
+}
